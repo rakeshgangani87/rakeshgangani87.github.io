@@ -20,3 +20,25 @@ if(promptItems.length){
     setCount(shown);empty.hidden=shown>0;
   });
 }
+
+document.querySelectorAll('a[href^="mailto:"]').forEach(a=>a.addEventListener('click',()=>{
+  const email=a.getAttribute('href').slice(7).split('?')[0],label=a.dataset.label||(a.dataset.label=a.textContent);
+  if(!navigator.clipboard)return;
+  navigator.clipboard.writeText(email).then(()=>{a.textContent='Copied: '+email;setTimeout(()=>{a.textContent=label},3000)});
+}));
+
+const contactForm=document.getElementById('contact-form');
+if(contactForm){
+  const status=contactForm.querySelector('.form-status'),btn=contactForm.querySelector('button');
+  contactForm.addEventListener('submit',e=>{
+    e.preventDefault();
+    if(contactForm.website.value)return;
+    const data=new URLSearchParams();
+    new FormData(contactForm).forEach((v,k)=>{if(k.startsWith('entry.'))data.append(k,v)});
+    btn.disabled=true;status.className='form-status';status.textContent='Sending…';
+    fetch(contactForm.action,{method:'POST',mode:'no-cors',body:data})
+      .then(()=>{contactForm.reset();status.classList.add('ok');status.textContent="Thanks! Your message has been sent. I'll get back to you soon."})
+      .catch(()=>{status.classList.add('err');status.textContent='Something went wrong. Please email me at rakeshgangani87@gmail.com.'})
+      .finally(()=>{btn.disabled=false});
+  });
+}
