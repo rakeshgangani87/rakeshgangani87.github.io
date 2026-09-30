@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0QZ4LNTTP4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-0QZ4LNTTP4');
+  </script>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Case study: a Shopify B2B bulk ordering page with category tabs, subcategory accordions and a variant-level order table that lets wholesale buyers add an entire order to the cart in one click.">
+  <title>Shopify B2B Bulk Order Case Study | Rakesh Gangani</title>
+  <link rel="canonical" href="https://rakeshgangani87.github.io/case-studies/shopify-b2b-bulk-order/">
+  <meta property="og:title" content="Shopify B2B Bulk Ordering — Case Study">
+  <meta property="og:description" content="How a tabbed, table-based bulk order page gave B2B customers a faster way to browse a large catalog and order in one click.">
+  <meta property="og:image" content="https://rakeshgangani87.github.io/images/bulk-order.png">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="../../">RG<span>.</span></a>
+  <nav>
+    <a href="../../#services">Services</a><a href="../../#work">Work</a><a href="../../#stack">Expertise</a><a href="../" aria-current="page">Case Studies</a><a href="../../sidekick-ai/">AI</a><a href="../../#contact">Contact</a>
+  </nav>
+  <a class="nav-cta" href="#contact">Let's talk →</a>
+</header>
+
+<main id="top">
+<article class="case">
+  <header class="hero case-hero">
+    <a class="case-back" href="../">← All case studies</a>
+    <div class="eyebrow">CASE STUDY · SHOPIFY B2B</div>
+    <h1>A one-click bulk ordering experience <em>for B2B buyers.</em></h1>
+    <p class="lead">A wholesale client needed their trade customers to move through a large catalog quickly and place big orders without clicking into product pages one at a time. I built a single bulk ordering page that shows the whole catalog as an order sheet.</p>
+  </header>
+
+  <dl class="case-meta">
+    <div><dt>Platform</dt><dd>Shopify</dd></div>
+    <div><dt>Audience</dt><dd>B2B / wholesale customers</dd></div>
+    <div><dt>My role</dt><dd>Solution design &amp; development</dd></div>
+    <div><dt>Focus</dt><dd>Catalog navigation · Bulk add to cart</dd></div>
+  </dl>
+
+  <figure class="case-figure">
+    <a href="../../images/bulk-order.png" target="_blank" rel="noopener"><img src="../../images/bulk-order.png" alt="Bulk ordering page with top-level category tabs, a search bar, an expanded Skincare accordion listing products in a table with quantity steppers and prices, collapsed subcategories below, and a summary bar with Reset, Checkout and Add to Order buttons" width="1600" height="1863" loading="lazy"></a>
+    <figcaption>A rebuild of the solution on my demo store. The client's store and data are under NDA, so all products and names shown here are sample data.</figcaption>
+  </figure>
+
+  <div class="case-body">
+    <section>
+      <h2>The challenge</h2>
+      <p>The client sells to business customers who reorder regularly and in volume. They already know what they want. Making them browse like retail shoppers slowed them down: open a collection, open a product, pick a variant, add it to the cart, go back, and repeat for every line on the order.</p>
+      <p>The client asked for three things:</p>
+      <ul>
+        <li>A <b>faster way to navigate the catalog</b>, grouped the way buyers already think about it.</li>
+        <li>A way to <b>see every product and variant at once</b>, with prices, without leaving the page.</li>
+        <li>A way to <b>build a full order and add it to the cart in one step</b>.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>The solution</h2>
+      <p>I designed a dedicated bulk ordering page that works like a digital order sheet, organised in three levels:</p>
+      <div class="case-levels">
+        <div><b>01</b><h3>Categories as tabs</h3><p>Top-level categories such as Clothing, Electronics or Beauty &amp; Personal Care appear as tabs across the top, so buyers can switch between them instantly.</p></div>
+        <div><b>02</b><h3>Subcategories as accordions</h3><p>Inside each tab, every subcategory is a collapsible section. Buyers open only the parts of the catalog they need and keep the rest out of the way.</p></div>
+        <div><b>03</b><h3>Products as a table</h3><p>Each subcategory lists its products in a table, with every variant on its own row: SKU, name, UPC, color, unit price and a quantity field.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>How buyers use it</h2>
+      <ol class="case-steps">
+        <li><b>Pick a category tab</b> and open the subcategories they need, or search by product name, SKU or UPC.</li>
+        <li><b>Enter quantities</b> for each variant with the stepper or by typing a number. Line totals update as they go.</li>
+        <li><b>Keep building the order</b> across as many tabs and subcategories as they like. A summary bar at the bottom shows selected items, total quantity and the grand total.</li>
+        <li><b>Click “Add to Order” once</b> to add every item to the cart together, then go straight to checkout.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Key features</h2>
+      <ul class="case-features">
+        <li><b>Variant-level ordering.</b> Every variant is its own row, so sizes and colors can be ordered side by side.</li>
+        <li><b>Search by name, SKU or UPC.</b> Buyers who work from their own purchase lists can jump straight to an item.</li>
+        <li><b>Hide out-of-stock items</b> to keep the list focused on what can ship.</li>
+        <li><b>Quick view</b> for product details without leaving the order sheet.</li>
+        <li><b>Live totals.</b> Line totals, total quantity and the order total update as quantities change.</li>
+        <li><b>Clear one line or reset everything</b> with a row delete button and a Reset Page action.</li>
+        <li><b>One-click add to cart</b> for the whole order, instead of one product at a time.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Technical approach</h2>
+      <p>The page is built on the client's Shopify theme using Liquid, JavaScript and CSS. It is driven by the store's existing collections and products, so the order sheet stays in sync with the catalog without extra maintenance. The page gathers every quantity the buyer has entered and sends it to the Shopify cart in one go. That is what turns a long ordering session into a single click.</p>
+      <div class="project-tags case-tags"><b>Shopify</b><b>Liquid</b><b>JavaScript</b><b>Cart API</b><b>B2B</b><b>CSS</b></div>
+    </section>
+
+    <section class="case-outcome">
+      <h2>The outcome</h2>
+      <p>The bulk ordering page gave the client's B2B customers a much faster way to navigate the catalog and place large orders, and it worked as the client expected. Buyers can now build an entire order from a single screen instead of visiting product pages one by one. This kind of speed matters most to repeat trade customers.</p>
+    </section>
+
+    <aside class="case-note">
+      <b>Note on confidentiality</b>
+      <p>This project was delivered under an NDA, so the client's name, branding and data aren't shown. The screenshot is from a demo store where I rebuilt the same application with sample products.</p>
+    </aside>
+  </div>
+</article>
+
+<section id="contact" class="contact">
+  <div class="eyebrow">NEED SOMETHING SIMILAR?</div>
+  <h2>Let's build a faster buying experience for your B2B customers.</h2>
+  <p>Bulk ordering, wholesale pricing, customer-specific catalogs and custom Shopify workflows built around how your buyers actually order.</p>
+  <form class="contact-form" id="contact-form" action="https://docs.google.com/forms/d/e/1FAIpQLScgJAlu4TRtAl6jVboZqie20S4O-I6D-ePw5_ATfh8WAE7VDw/formResponse" method="POST">
+    <div class="field-row">
+      <label>Name<input type="text" name="entry.1779958118" autocomplete="name" required></label>
+      <label>Email<input type="email" name="entry.913482781" autocomplete="email" required></label>
+    </div>
+    <label>Message<textarea name="entry.1011818678" rows="5" placeholder="Tell me about your B2B store and how your customers order." required></textarea></label>
+    <label class="hp" aria-hidden="true">Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+    <button class="button light" type="submit">Send message</button>
+    <p class="form-status" role="status" aria-live="polite"></p>
+  </form>
+  <div class="actions"><a class="button outline-light" href="mailto:rakeshgangani87@gmail.com">Email me</a><a class="button outline-light" href="https://linkedin.com/in/rakeshgangani" target="_blank" rel="noopener">LinkedIn</a></div>
+</section>
+</main>
+<footer>© 2026 Rakesh Gangani · Senior eCommerce Developer</footer>
+<script src="../../script.js"></script>
+</body>
+</html>
