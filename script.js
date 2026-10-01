@@ -42,3 +42,12 @@ if(contactForm){
       .finally(()=>{btn.disabled=false});
   });
 }
+
+const navBar=document.querySelector('.nav'),navToggle=document.querySelector('.nav-toggle');
+if(navBar&&navToggle){
+  const setMenu=open=>{navBar.classList.toggle('open',open);navToggle.setAttribute('aria-expanded',open);navToggle.setAttribute('aria-label',open?'Close menu':'Open menu')};
+  navToggle.addEventListener('click',()=>setMenu(!navBar.classList.contains('open')));
+  navBar.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+  document.addEventListener('click',e=>{if(!navBar.contains(e.target))setMenu(false)});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
+}
