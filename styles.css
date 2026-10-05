@@ -77,3 +77,6 @@
 .nav.open nav{display:flex}
 .nav nav a{font-size:17px;padding:14px 0;border-bottom:1px solid var(--line)}.nav nav a:last-child{border-bottom:0}
 }
+.intro-badges{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 6px}.intro-badges .intro-status{margin:0}.intro-status.alt{background:#f1f1ee;color:#40444b}
+.intro-skills{margin:0 0 20px;padding-top:16px;border-top:1px solid var(--line)}.intro-skills h2{font:600 12px "DM Sans",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#70746d;margin:0 0 12px}.intro-skills ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}.intro-skills li{font-size:12px;color:var(--ink);border:1px solid #d9dad5;border-radius:999px;padding:4px 10px}
+.intro-facts{margin-bottom:0}
