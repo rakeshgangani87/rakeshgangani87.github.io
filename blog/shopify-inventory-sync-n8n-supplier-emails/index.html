@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0QZ4LNTTP4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-0QZ4LNTTP4');
+  </script>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Build an n8n workflow that reads a supplier's stock email, parses the CSV attachment and sets Shopify inventory by SKU every 5 minutes, with no manual entry and no paid app.">
+  <title>Auto-Sync Shopify Inventory from Supplier Emails with n8n | Rakesh Gangani</title>
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Rakesh Gangani">
+  <meta name="keywords" content="Shopify, n8n, inventory sync, workflow automation, Admin GraphQL API, inventorySetQuantities, Gmail, CSV, supplier feed">
+  <meta name="theme-color" content="#131211">
+  <link rel="canonical" href="https://rakeshgangani87.github.io/blog/shopify-inventory-sync-n8n-supplier-emails/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Rakesh Gangani">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://rakeshgangani87.github.io/blog/shopify-inventory-sync-n8n-supplier-emails/">
+  <meta property="og:title" content="Auto-Sync Shopify Inventory from Supplier Emails with n8n">
+  <meta property="og:description" content="An n8n workflow that reads a supplier's stock email, parses the CSV attachment and sets Shopify inventory by SKU every 5 minutes.">
+  <meta property="og:image" content="https://rakeshgangani87.github.io/images/blog/n8n-shopify-inventory-sync-workflow.png">
+  <meta property="og:image:width" content="1558">
+  <meta property="og:image:height" content="258">
+  <meta property="og:image:alt" content="n8n workflow canvas that syncs Shopify inventory from a supplier email, from the Gmail Trigger through to Mark email read">
+  <meta property="article:published_time" content="2026-10-12">
+  <meta property="article:author" content="Rakesh Gangani">
+  <meta property="article:section" content="Automation">
+  <meta property="article:tag" content="Shopify">
+  <meta property="article:tag" content="n8n">
+  <meta property="article:tag" content="Inventory">
+  <meta property="article:tag" content="Automation">
+  <meta property="article:tag" content="Admin GraphQL API">
+  <meta property="article:tag" content="Gmail">
+  <meta property="article:tag" content="CSV">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Auto-Sync Shopify Inventory from Supplier Emails with n8n">
+  <meta name="twitter:description" content="An n8n workflow that reads a supplier's stock email, parses the CSV attachment and sets Shopify inventory by SKU every 5 minutes.">
+  <meta name="twitter:image" content="https://rakeshgangani87.github.io/images/blog/n8n-shopify-inventory-sync-workflow.png">
+  <meta name="twitter:image:alt" content="n8n workflow canvas that syncs Shopify inventory from a supplier email, from the Gmail Trigger through to Mark email read">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://rakeshgangani87.github.io/blog/shopify-inventory-sync-n8n-supplier-emails/#article",
+      "headline": "Auto-Sync Shopify Inventory from Supplier Emails with n8n",
+      "description": "Build an n8n workflow that reads a supplier's stock email, parses the CSV attachment and sets Shopify inventory by SKU every 5 minutes, with no manual entry and no paid app.",
+      "url": "https://rakeshgangani87.github.io/blog/shopify-inventory-sync-n8n-supplier-emails/",
+      "mainEntityOfPage": "https://rakeshgangani87.github.io/blog/shopify-inventory-sync-n8n-supplier-emails/",
+      "image": "https://rakeshgangani87.github.io/images/blog/n8n-shopify-inventory-sync-workflow.png",
+      "author": {
+        "@id": "https://rakeshgangani87.github.io/#person"
+      },
+      "publisher": {
+        "@id": "https://rakeshgangani87.github.io/#person"
+      },
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://rakeshgangani87.github.io/#website"
+      },
+      "articleSection": "Automation",
+      "keywords": "Shopify, n8n, Inventory, Automation, Admin GraphQL API, Gmail, CSV",
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Shopify inventory management"
+        },
+        {
+          "@type": "Thing",
+          "name": "n8n workflow automation"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://rakeshgangani87.github.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://rakeshgangani87.github.io/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Auto-Sync Shopify Inventory from Supplier Emails with n8n",
+          "item": "https://rakeshgangani87.github.io/blog/shopify-inventory-sync-n8n-supplier-emails/"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css" integrity="sha384-gvLq/iOMNnPchdosgVym5huSVkKipHCQaqSw2Eg0V52Mzmlf169ZOsXcNc2cNu8x" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+<div class="grain-overlay" aria-hidden="true"></div>
+<div class="stage-frame" aria-hidden="true"></div>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../../"><span class="brand-name">Rakesh Gangani</span><span class="brand-tag">[ eCommerce Developer ]</span></a>
+    <nav id="site-nav" aria-label="Primary" data-lenis-prevent>
+      <a href="../../#services">Services</a><a href="../../#work">Work</a><a href="../../#stack">Expertise</a><a href="../../#certifications">Certifications</a><a href="../../case-studies/">Case Studies</a><a href="../../blog/" aria-current="page">Blog</a><a href="../../sidekick-ai/">AI</a><a href="#contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="#contact">Let's talk →</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
+  </div>
+  <div class="scroll-progress" aria-hidden="true"></div>
+</header>
+
+<main id="top">
+<article class="case post">
+  <header class="hero case-hero">
+    <a class="case-back" href="../">← All articles</a>
+    <div class="eyebrow">BLOG · SHOPIFY AUTOMATION</div>
+    <h1>Auto-sync Shopify inventory from supplier emails <em>with n8n.</em></h1>
+    <p class="lead">An n8n workflow can read a supplier's stock email, parse the CSV attachment and set Shopify inventory by SKU every 5 minutes, with no manual entry and no paid app.</p>
+    <p class="post-byline">By Rakesh Gangani · <time datetime="2026-10-12">Oct 12, 2026</time></p>
+    <div class="project-tags post-tags" aria-label="Tags"><b>Shopify</b><b>n8n</b><b>Inventory</b><b>Automation</b><b>Admin GraphQL API</b><b>Gmail</b><b>CSV</b></div>
+  </header>
+
+  <dl class="case-meta">
+    <div><dt>Platform</dt><dd>Shopify</dd></div>
+    <div><dt>Automation</dt><dd>n8n, cloud or self-hosted</dd></div>
+    <div><dt>API</dt><dd>Admin GraphQL 2026-04+</dd></div>
+    <div><dt>Runs</dt><dd>Every 5 minutes</dd></div>
+  </dl>
+
+  <figure class="case-figure">
+    <a href="../../images/blog/n8n-shopify-inventory-sync-workflow.png" target="_blank" rel="noopener"><img src="../../images/blog/n8n-shopify-inventory-sync-workflow.png" alt="n8n workflow canvas: Gmail Trigger, Pick newest email, Stale?, Extract from File, Build lookup batches, Get Shopify token, Fan out batches, Lookup variants by SKU, Build inventory input, Set inventory quantities, Check result and Mark email read, with a Skip – mark read only branch for stale emails" width="1558" height="258"></a>
+    <figcaption>The finished workflow on the n8n canvas after a successful run.</figcaption>
+  </figure>
+
+  <div class="case-body post-body">
+    <section>
+      <h2>The problem</h2>
+      <p>Many suppliers still send stock levels as a CSV or Excel file attached to an email. Someone opens it, finds each SKU in Shopify admin and types the new quantity. That is slow, error-prone, and it lags behind the supplier, so the store oversells or shows items out of stock that are actually available.</p>
+      <p>This guide builds a workflow that does the whole job:</p>
+      <ol>
+        <li>Polls Gmail for unread emails from the supplier that have an attachment.</li>
+        <li>Keeps only the newest email, so an older file can never overwrite newer stock.</li>
+        <li>Parses the CSV and matches each row to a Shopify variant by exact SKU.</li>
+        <li>Sets the <b>Available</b> quantity at one location with the Admin GraphQL API.</li>
+        <li>Marks the emails as read, so they are not processed again.</li>
+      </ol>
+      <figure class="post-figure">
+        <a href="../../images/blog/n8n-shopify-inventory-sync-flow.png" target="_blank" rel="noopener"><img src="../../images/blog/n8n-shopify-inventory-sync-flow.png" alt="Flow diagram: Gmail Trigger, then Pick newest email, then a Stale? decision. Yes goes straight to Mark emails read. No goes to Match SKUs, then Set Available qty with inventorySetQuantities, then Mark emails read." width="1344" height="762" loading="lazy"></a>
+        <figcaption>An email older than the last applied one skips straight to being marked read; only the newest file is written to Shopify.</figcaption>
+      </figure>
+      <p>It runs on n8n Cloud or a self-hosted n8n, and uses Shopify's current API rules: 2026-04 and later require compare-and-swap quantities and an idempotency key on every inventory write.</p>
+    </section>
+
+    <section>
+      <h2>1. Prerequisites</h2>
+      <p>You need four things in place before importing the workflow: an n8n instance, Gmail OAuth, a Shopify app with the right scopes, and an agreed attachment format.</p>
+
+      <h3>n8n, cloud or self-hosted</h3>
+      <ul>
+        <li>Either an n8n Cloud workspace, or n8n self-hosted on a server (Docker or <code>npm install -g n8n</code>), reachable at a URL such as <code>https://n8n.your-domain.com</code>.</li>
+        <li>If you self-host, the machine must stay on. If it sleeps or the container stops, the trigger stops polling.</li>
+      </ul>
+
+      <h3>Gmail OAuth (Google Cloud)</h3>
+      <ol>
+        <li>In Google Cloud Console, create a project and enable the <b>Gmail API</b>.</li>
+        <li>Create an OAuth client of type <b>Web application</b>.</li>
+        <li>Add the redirect URI that n8n shows on the Gmail credential. It is your n8n URL followed by the callback path, for example <code>https://n8n.your-domain.com/rest/oauth2-credential/callback</code>. Google rejects LAN IPs, so if you open a self-hosted n8n by IP, set <code>N8N_EDITOR_BASE_URL</code> to your HTTPS domain.</li>
+        <li>Set the OAuth consent screen to <b>In production</b>. In Testing mode, refresh tokens expire after 7 days and the trigger silently breaks every week.</li>
+        <li>In n8n, create a <b>Gmail OAuth2</b> credential with the client ID and secret, and sign in.</li>
+      </ol>
+
+      <h3>Shopify app (Dev Dashboard)</h3>
+      <p>Since 1 January 2026, new legacy custom apps can no longer be created in the store admin. New apps are created in the <b>Dev Dashboard</b> and get tokens through the client credentials grant; each token expires after 24 hours, so the workflow requests a fresh one on every run.</p>
+      <ol>
+        <li>Create the app in the Dev Dashboard, under the same organization as the store.</li>
+        <li>Go to <b>Versions</b> → create a version with the scopes <code>read_products</code>, <code>read_inventory</code> and <code>write_inventory</code> → <b>Release</b>.</li>
+        <li>Install the app on the store from the app's <b>Home</b> tab. After any scope change, update or reinstall it so the store approves the new scopes.</li>
+        <li>Copy the <b>Client ID</b> and <b>Client secret</b> from <b>Settings</b>.</li>
+        <li>In n8n, create a <b>Custom Auth</b> credential:
+<pre><code>{
+  "body": {
+    "client_id": "YOUR_CLIENT_ID",
+    "client_secret": "YOUR_CLIENT_SECRET"
+  }
+}</code></pre></li>
+      </ol>
+
+      <h3>Location ID</h3>
+      <p>Inventory is set per location. Find the location's global ID with this query in GraphiQL or a test HTTP node:</p>
+<pre><code>{ locations(first: 10) { nodes { id name } } }</code></pre>
+      <p>Copy the full ID, for example <code>gid://shopify/Location/88790925483</code>. Using the wrong one is the most common reason updates "don't show" in admin.</p>
+
+      <h3>Attachment format</h3>
+      <p>The supplier file needs a SKU column and a quantity column. Header names are matched case-insensitively and can be changed in the config.</p>
+<pre><code>sku,qty,product_name
+TSHIRT-BLK-S,25,Basic Tee Black S
+TSHIRT-BLK-M,40,Basic Tee Black M
+TSHIRT-WHT-M,"1,250",Basic Tee White M</code></pre>
+      <p>Every variant you want updated must have <b>Track quantity</b> turned on in Shopify.</p>
+    </section>
+
+    <section>
+      <h2>2. Execution</h2>
+      <p>Import the workflow JSON, set five config values, select three credentials, test once by hand, then publish.</p>
+
+      <h3>Step 1: Import and configure</h3>
+      <ol>
+        <li>In n8n, go to <b>Workflows → Import from File</b> and pick the workflow JSON.</li>
+        <li>Open <b>Gmail Trigger</b> and set the search query to your supplier: <code>from:supplier@example.com has:attachment is:unread</code>. Paste the same query into Gmail search to confirm it finds the email.</li>
+        <li>Open the <b>Build lookup batches</b> Code node and edit the config block at the top:
+<pre><code>const SHOP = 'your-store.myshopify.com';
+const API_VERSION = '2026-07';
+const LOCATION_ID = 'gid://shopify/Location/88790925483';
+const SKU_COL = 'sku';   // header in the attachment
+const QTY_COL = 'qty';</code></pre></li>
+        <li>Select credentials on <b>Gmail Trigger</b>, <b>Mark email read</b> (Gmail OAuth2) and <b>Get Shopify token</b> (Custom Auth). Imported workflows never carry credentials, and a missing one fails with <code>NodeOperationError: Credentials not found</code>.</li>
+        <li>If the supplier sends Excel, change <b>Extract from File</b> from CSV to XLSX.</li>
+      </ol>
+
+      <h3>Step 2: What each node does</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Node</th><th scope="col">What it does</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Gmail Trigger</th><td>Polls every 5 minutes for unread matching emails and downloads attachments as <code>attachment_0</code>, <code>attachment_1</code>, …</td></tr>
+            <tr><th scope="row">Pick newest email</th><td>Sorts the emails by date and keeps only the newest; collects every email ID so all get marked read</td></tr>
+            <tr><th scope="row">Stale?</th><td>Compares the email's date with the last applied email; older or equal goes to the skip branch</td></tr>
+            <tr><th scope="row">Skip – mark read only</th><td>Marks stale emails read without touching inventory</td></tr>
+            <tr><th scope="row">Extract from File</th><td>Parses the CSV into one item per row</td></tr>
+            <tr><th scope="row">Build lookup batches</th><td>Builds a SKU → quantity map (strips thousands separators; last duplicate wins) and SKU search queries in batches of 50</td></tr>
+            <tr><th scope="row">Get Shopify token</th><td>Exchanges client ID and secret for a 24-hour access token, once per run</td></tr>
+            <tr><th scope="row">Lookup variants by SKU</th><td>Queries <code>productVariants</code> to get each SKU's inventory item ID and tracking flag</td></tr>
+            <tr><th scope="row">Build inventory input</th><td>Keeps exact SKU matches that are tracked, builds the mutation input and the idempotency key</td></tr>
+            <tr><th scope="row">Set inventory quantities</th><td>Calls <code>inventorySetQuantities</code> with <code>@idempotent</code></td></tr>
+            <tr><th scope="row">Check result</th><td>Fails the run on any <code>userErrors</code>, records the applied email's date, reports changes</td></tr>
+            <tr><th scope="row">Mark email read</th><td>Marks every processed email read</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Step 3: Shopify 2026-04 API rules</h3>
+      <p>Two changes in API version 2026-04 break older inventory code. The workflow handles both.</p>
+      <p><b>Compare-and-swap is mandatory.</b> Each quantity must carry <code>changeFromQuantity</code>: either the quantity you expect Shopify to have now, or an explicit <code>null</code> to opt out. The supplier file is the source of truth here, so the workflow sends <code>null</code>. The old <code>compareQuantity</code> and <code>ignoreCompareQuantity</code> fields are removed.</p>
+      <p><b>Idempotency is mandatory.</b> Every call needs <code>@idempotent(key: ...)</code>. Reusing a key returns the first result and changes nothing; reusing it with different input fails with <code>IDEMPOTENCY_KEY_PARAMETER_MISMATCH</code>. The workflow builds the key from the email ID plus a hash of the payload, so the same email and data are deduplicated, while changed data gets a new key.</p>
+<pre><code>mutation($input: InventorySetQuantitiesInput!, $key: String!) {
+  inventorySetQuantities(input: $input) @idempotent(key: $key) {
+    inventoryAdjustmentGroup {
+      id
+      changes { name delta quantityAfterChange item { sku } }
+    }
+    userErrors { code field message }
+  }
+}</code></pre>
+      <p>A quantity entry looks like this:</p>
+<pre><code>{
+  "inventoryItemId": "gid://shopify/InventoryItem/50321394827435",
+  "locationId": "gid://shopify/Location/88790925483",
+  "quantity": 25,
+  "changeFromQuantity": null
+}</code></pre>
+
+      <h3>Step 4: Newest email wins</h3>
+      <p>Inventory files are snapshots, so only the latest one matters. Without a guard, two problems appear:</p>
+      <ul>
+        <li>When several emails arrive between polls, rows from all of them are merged and the oldest file's values can win.</li>
+        <li>When an older unread email is picked up on a later run, it overwrites newer stock with outdated numbers.</li>
+      </ul>
+      <p><b>Pick newest email</b> keeps only the latest email in each run. <b>Check result</b> stores that email's timestamp in the workflow's static data, and <b>Stale?</b> sends any email that is the same age or older down the skip branch, where it is only marked read. Static data is saved only in published (production) runs, not manual tests.</p>
+
+      <h3>Step 5: Test, then publish</h3>
+      <ol>
+        <li>Mark old test emails in Gmail as read.</li>
+        <li>Send one email with the CSV attached from the supplier address.</li>
+        <li>Click <b>Fetch Test Event</b> on the Gmail Trigger, then <b>Execute Workflow</b>.</li>
+        <li>Check <b>Set inventory quantities</b>: a successful write returns an <code>inventoryAdjustmentGroup.id</code> and a <code>changes</code> list.</li>
+        <li>Publish (activate) the workflow. From then on, check runs under <b>Executions</b>, not on the canvas.</li>
+      </ol>
+      <p>Publishing is not required for updates to happen: a manual run writes to live inventory too. Publishing only makes the trigger poll on its own. After activation, the trigger only picks up emails that arrive after that moment.</p>
+    </section>
+
+    <section>
+      <h2>3. Test cases</h2>
+      <p>Run these ten cases before going live; each names the input and the output to check in the execution.</p>
+
+      <h3>Sample attachment</h3>
+      <p>Replace the SKUs with real ones from your store. The extra rows exercise the parsing rules.</p>
+<pre><code>sku,qty,product_name
+TSHIRT-BLK-S,25,Basic Tee Black S
+TSHIRT-BLK-M,40,Basic Tee Black M
+TSHIRT-BLK-L,0,Basic Tee Black L
+TSHIRT-WHT-M,"1,250",Basic Tee White M
+CAP-NAVY-OS,8,Baseball Cap Navy
+CAP-NAVY-OS,10,Baseball Cap Navy (duplicate - last row wins)
+NOT-IN-STORE-999,50,Unknown SKU
+TOTE-NAT-OS,,Blank qty</code></pre>
+
+      <h3>Cases</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">#</th><th scope="col">Scenario</th><th scope="col">Input</th><th scope="col">Expected result</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><th scope="row">Happy path</th><td>One email, valid SKUs, new quantities</td><td><code>inventoryAdjustmentGroup.id</code> returned; <code>changes</code> lists each SKU with its delta; email marked read</td></tr>
+            <tr><td>2</td><th scope="row">Zero stock</th><td>Row with <code>qty</code> = 0</td><td>Available set to 0; product shows sold out if it doesn't continue selling</td></tr>
+            <tr><td>3</td><th scope="row">Thousands separator</th><td><code>"1,250"</code></td><td>Parsed as 1250</td></tr>
+            <tr><td>4</td><th scope="row">Duplicate SKU</th><td><code>CAP-NAVY-OS</code> twice (8, then 10)</td><td>Set to 10</td></tr>
+            <tr><td>5</td><th scope="row">Unknown SKU</th><td><code>NOT-IN-STORE-999</code></td><td>Listed in <code>unmatched</code> in Check result; other rows still update</td></tr>
+            <tr><td>6</td><th scope="row">Blank quantity</th><td><code>TOTE-NAT-OS</code> with empty qty</td><td>Row skipped, no error</td></tr>
+            <tr><td>7</td><th scope="row">Untracked variant</th><td>SKU with Track quantity off</td><td>Listed in <code>untracked</code>; not updated</td></tr>
+            <tr><td>8</td><th scope="row">No change</th><td>Same file sent again with same values</td><td><code>inventoryAdjustmentGroup: null</code>, no <code>userErrors</code>; nothing to change</td></tr>
+            <tr><td>9</td><th scope="row">Two emails at once</th><td>Older email (qty 40) and newer email (qty 25) unread together</td><td>Newer applied (25); both marked read</td></tr>
+            <tr><td>10</td><th scope="row">Late old email</th><td>Published workflow; an email older than the last applied one arrives</td><td>Routed to <b>Skip – mark read only</b>; inventory unchanged</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Errors you may hit</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Error</th><th scope="col">Cause</th><th scope="col">Fix</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>Credentials not found</code></th><td>Credential not selected after import</td><td>Select it on the node and save</td></tr>
+            <tr><th scope="row"><code>ACCESS_DENIED</code> for <code>productVariants</code></th><td>App lacks <code>read_products</code></td><td>Add scopes in a new app version, release, reinstall; check <code>scope</code> in the token response</td></tr>
+            <tr><th scope="row"><code>shop_not_permitted</code></th><td>App and store in different organizations</td><td>Create the app under the store's organization</td></tr>
+            <tr><th scope="row"><code>IDEMPOTENCY_KEY_PARAMETER_MISMATCH</code></th><td>Same key reused with different quantities</td><td>Build the key from email ID + payload hash</td></tr>
+            <tr><th scope="row"><code>inventoryAdjustmentGroup: null</code></th><td>Quantities already match, or the key was a repeat</td><td>Change a quantity and send a new email</td></tr>
+            <tr><th scope="row">Run succeeds, admin unchanged</th><td>Wrong <code>LOCATION_ID</code> or viewing another location</td><td>Check the location ID and the admin location filter</td></tr>
+            <tr><th scope="row">No executions after publishing</th><td>Email arrived before activation, was already read, or a self-hosted n8n was asleep</td><td>Send a new email; keep a self-hosted n8n running</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="case-outcome">
+      <h2>Wrapping up</h2>
+      <p>Once published, the supplier's email becomes the inventory update: the newest file is applied within 5 minutes, and older ones are ignored.</p>
+      <p>Natural extensions: point an n8n <b>Error Workflow</b> at this one to get alerted on failures, send a summary of <code>changes</code> and <code>unmatched</code> SKUs to email or Slack after each run, or add an <code>after:</code> date filter to the Gmail query to limit how far back it looks.</p>
+    </section>
+
+    <aside class="case-note post-sources">
+      <b>Sources</b>
+      <ul>
+        <li><a href="https://shopify.dev/changelog/finalizing-compare-and-swap-redesign-for-inventory-set-quantities" target="_blank" rel="noopener">New compare and swap syntax for inventorySetQuantities</a></li>
+        <li><a href="https://shopify.dev/docs/api/admin-graphql/2026-04/mutations/inventorySetQuantities" target="_blank" rel="noopener">inventorySetQuantities, Admin GraphQL 2026-04</a></li>
+        <li><a href="https://shopify.dev/release-notes/2026-04" target="_blank" rel="noopener">Shopify 2026-04 release notes</a></li>
+        <li><a href="https://community.shopify.dev/t/how-to-use-shopify-s-api-with-custom-app-changes/24852" target="_blank" rel="noopener">How to use Shopify's API with custom app changes (community thread)</a></li>
+      </ul>
+    </aside>
+  </div>
+</article>
+
+<section id="contact" class="contact">
+  <div class="eyebrow">NEED SOMETHING SIMILAR?</div>
+  <h2>Let's automate the manual work in your store.</h2>
+  <p>Inventory feeds, supplier integrations, order workflows and custom Shopify automation built around how your business actually runs.</p>
+  <form class="contact-form" id="contact-form" action="https://docs.google.com/forms/d/e/1FAIpQLScgJAlu4TRtAl6jVboZqie20S4O-I6D-ePw5_ATfh8WAE7VDw/formResponse" method="POST">
+    <div class="field-row">
+      <label>Name<input type="text" name="entry.1779958118" autocomplete="name" required></label>
+      <label>Email<input type="email" name="entry.913482781" autocomplete="email" required></label>
+    </div>
+    <label>Message<textarea name="entry.1011818678" rows="5" placeholder="Tell me about your store and what you need help with." required></textarea></label>
+    <label class="hp" aria-hidden="true">Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+    <button class="button light" type="submit">Send message</button>
+    <p class="form-status" role="status" aria-live="polite"></p>
+  </form>
+  <div class="actions"><a class="button outline-light" href="mailto:rakeshgangani87@gmail.com">Email me</a><a class="button outline-light" href="https://linkedin.com/in/rakeshgangani" target="_blank" rel="noopener">LinkedIn</a></div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div><a href="../../#work">Selected work</a><a href="../../case-studies/">Case studies</a><a href="../../blog/">Blog</a><a href="../../sidekick-ai/">Sidekick AI prompts</a></div>
+    <div><a href="mailto:rakeshgangani87@gmail.com">rakeshgangani87@gmail.com</a></div>
+    <div><a href="https://linkedin.com/in/rakeshgangani" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a></div>
+    <div><p>© 2026 by Rakesh Gangani.</p><p>Senior eCommerce Developer</p></div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
+<script src="../../script.js"></script>
+</body>
+</html>

@@ -78,9 +78,25 @@ h1,h2,h3,p,ul,ol,dl,figure{margin:0}img{max-width:100%}a{color:inherit}
 .stat-num{font-stretch:125%;font-size:clamp(36px,4vw,48px);font-weight:900;line-height:1;letter-spacing:-.025em;color:var(--primary);font-variant-numeric:tabular-nums}
 .stat-label{margin-top:10px;font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted)}
 
+/* Brand logo slider */
+.brands{padding:44px 0 48px;border-bottom:1px solid var(--line)}
+.brands .eyebrow{padding:0 var(--pad);margin-bottom:24px}
+.brand-slider{overflow-x:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.brand-slider::-webkit-scrollbar{display:none}
+.brand-track{list-style:none;padding:8px 0;display:flex;width:max-content}
+.brand-track li{flex:none;margin-right:20px}
+.brand-slider.is-sliding{overflow:hidden}
+.brand-slider.is-sliding .brand-track{animation:brand-slide 45s linear infinite}
+.brand-slider.is-sliding:hover .brand-track,.brand-slider.is-sliding:focus-within .brand-track{animation-play-state:paused}
+@keyframes brand-slide{to{transform:translateX(-50%)}}
+.brand-tile{display:flex;align-items:center;justify-content:center;height:92px;padding:0 30px;background:#fff;border:1px solid transparent;transition:transform .25s,border-color .25s}
+.brand-tile.dark{background:var(--secondary);border-color:var(--line-strong)}
+.brand-tile:hover{transform:translateY(-4px);border-color:var(--primary)}
+.brand-tile img{display:block;width:auto;height:auto;max-height:50px;max-width:190px}
+
 /* Sections */
 .section{padding:112px var(--pad)}
-.section+.section,.stats+.section{border-top:1px solid var(--line)}.stats+.section{border-top:0}
+.section+.section,.stats+.section{border-top:1px solid var(--line)}.stats+.section,.brands+.section{border-top:0}
 .split{display:grid;grid-template-columns:1fr 1.7fr;gap:64px;align-items:start}
 .split>.section-head{position:sticky;top:112px}
 
@@ -226,6 +242,32 @@ h1,h2,h3,p,ul,ol,dl,figure{margin:0}img{max-width:100%}a{color:inherit}
 .case-outcome h2,.case-outcome p{color:var(--bg)}
 .case-note{border-left:3px solid var(--primary);background:var(--secondary);padding:22px 26px}.case-note p{font-size:14px;color:var(--muted);margin-top:6px}
 
+/* Blog */
+.post-list{display:grid;gap:72px;max-width:68rem}
+.post-card .work-media{rotate:0deg!important}
+.post-card .work-media img{aspect-ratio:auto;height:auto;object-fit:contain}
+.post-card .work-meta h3{font-size:clamp(20px,2.2vw,26px)}
+.post-byline{margin-top:24px;font-stretch:72%;font-size:13px;text-transform:uppercase;letter-spacing:.2em;color:var(--muted)}
+.post-tags{padding-top:18px}.post-tags b{font-size:12px}
+.post-body h3{font-stretch:125%;font-size:20px;font-weight:700;line-height:1.25;letter-spacing:-.02em;margin:40px 0 14px}
+.post-body :is(ul,ol,pre,figure,.table-wrap)+p{margin-top:14px}
+.post-body a{color:var(--primary);text-underline-offset:4px}
+.post-body code{font:500 .86em/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--fg);background:var(--secondary);border:1px solid var(--line);padding:2px 6px;overflow-wrap:anywhere}
+.post-body pre{margin:18px 0;padding:20px 22px;background:var(--secondary);border:1px solid var(--line);border-left:3px solid var(--primary);overflow-x:auto;font-size:15px;line-height:1.6}
+.post-body pre code{display:block;width:max-content;min-width:100%;padding:0;border:0;background:none;font-size:14px;line-height:1.65;overflow-wrap:normal}
+.post-figure{margin:28px 0}
+.post-figure a{display:block;border:1px solid hsl(48 33% 94%/.15);background:#fff;padding:10px;transition:border-color .3s}.post-figure a:hover{border-color:hsl(70 100% 58%/.6)}
+.post-figure img{display:block;width:100%;height:auto}
+.post-figure figcaption{font-size:13px;color:var(--muted);margin-top:12px}
+.table-wrap{margin:18px 0;border:1px solid var(--line);overflow-x:auto}
+.post-body table{width:100%;min-width:34rem;border-collapse:collapse;font-size:15px;line-height:1.5}
+.post-body th,.post-body td{padding:13px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);color:hsl(48 33% 94%/.78)}
+.post-body tbody tr:last-child>*{border-bottom:0}
+.post-body thead th{font-stretch:72%;font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.2em;color:var(--primary);background:var(--secondary);white-space:nowrap}
+.post-body tbody th{font-weight:600;color:var(--fg)}
+.post-body .case-outcome b{color:inherit}.post-body .case-outcome code{color:var(--bg);background:hsl(45 9% 7%/.1);border-color:hsl(45 9% 7%/.25)}
+.post-sources ul{margin-top:10px}.post-sources li{font-size:14px;margin-bottom:6px}
+
 /* Scroll reveal */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1) var(--d,0ms),transform .7s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
 .reveal.in{opacity:1;transform:none}
@@ -245,7 +287,7 @@ h1,h2,h3,p,ul,ol,dl,figure{margin:0}img{max-width:100%}a{color:inherit}
 }
 @media(max-width:800px){
 :root{--gutter:24px}
-.stage-frame{inset:8px}
+.stage-frame{inset:8px}.brand-tile{height:76px;padding:0 22px}.brand-tile img{max-height:40px;max-width:150px}.brand-track li{margin-right:14px}
 .section{padding:80px var(--pad)}
 .hero-hello{font-size:clamp(4.5rem,24vw,9rem)}.sticker.dark{right:20px;top:calc(112px + 24vw)}
 .polaroid{width:176px}.polaroid-links{left:-14px}.polaroid-links a{width:40px;height:40px}
@@ -260,6 +302,7 @@ h1,h2,h3,p,ul,ol,dl,figure{margin:0}img{max-width:100%}a{color:inherit}
 .case-meta{grid-template-columns:1fr 1fr}.case-meta div{padding:22px 20px}.case-meta div:nth-child(odd){border-left:0;padding-left:0}.case-meta div:nth-child(n+3){border-top:1px solid var(--line)}
 .case-figure{margin-top:44px}.case-levels{grid-template-columns:1fr}.case-levels div{padding:24px 0;border-left:0!important;border-bottom:1px solid var(--line)}.case-levels b{margin-bottom:14px}
 .case-body{padding-block:64px 72px}.case-body .case-outcome{padding:30px}
+.post-list{gap:56px}.post-body pre{padding:16px 18px}.post-body th,.post-body td{padding:11px 12px}
 }
 @media(max-width:640px){
 .work-grid,.cert-grid{grid-template-columns:1fr}
