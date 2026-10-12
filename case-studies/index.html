@@ -16,7 +16,7 @@
   <title>Case Studies | Rakesh Gangani</title>
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="author" content="Rakesh Gangani">
-  <meta name="theme-color" content="#f8f8f5">
+  <meta name="theme-color" content="#131211">
   <link rel="canonical" href="https://rakeshgangani87.github.io/case-studies/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Rakesh Gangani">
@@ -82,16 +82,25 @@
   ]
 }
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css" integrity="sha384-gvLq/iOMNnPchdosgVym5huSVkKipHCQaqSw2Eg0V52Mzmlf169ZOsXcNc2cNu8x" crossorigin="anonymous">
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
+<div class="grain-overlay" aria-hidden="true"></div>
+<div class="stage-frame" aria-hidden="true"></div>
 <header class="nav">
-  <a class="brand" href="../">RG<span>.</span></a>
-  <nav id="site-nav">
-    <a href="../#services">Services</a><a href="../#work">Work</a><a href="../#stack">Expertise</a><a href="./" aria-current="page">Case Studies</a><a href="../sidekick-ai/">AI</a><a href="../#contact">Contact</a>
-  </nav>
-  <a class="nav-cta" href="#contact">Let's talk →</a>
-  <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
+  <div class="nav-inner">
+    <a class="brand" href="../"><span class="brand-name">Rakesh Gangani</span><span class="brand-tag">[ eCommerce Developer ]</span></a>
+    <nav id="site-nav" aria-label="Primary" data-lenis-prevent>
+      <a href="../#services">Services</a><a href="../#work">Work</a><a href="../#stack">Expertise</a><a href="../#certifications">Certifications</a><a href="../case-studies/" aria-current="page">Case Studies</a><a href="../sidekick-ai/">AI</a><a href="#contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="#contact">Let's talk →</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
+  </div>
+  <div class="scroll-progress" aria-hidden="true"></div>
 </header>
 
 <main id="top">
@@ -101,23 +110,16 @@
   <p class="lead">A closer look at selected projects: what the client needed, what I built and how it worked out. Some work is under NDA, so I show it rebuilt on a demo store with sample data.</p>
 </section>
 
-<section class="section dark">
-  <div class="portfolio-grid">
+<section class="section">
+  <div class="work-grid">
 
-    <article class="portfolio-card case-card">
+    <article class="work-card case-card">
       <a class="case-card-link" href="shopify-b2b-bulk-order/">
-        <div class="project-image shopify has-image">
-          <img src="../images/bulk-order.png" alt="Bulk ordering page with category tabs and a product order table" loading="lazy">
-          <span>SHOPIFY · B2B</span>
-          <strong>Bulk Ordering</strong>
-        </div>
-        <div class="project-content">
-          <span class="project-type">SHOPIFY · B2B · CUSTOM EXPERIENCE</span>
-          <h3>One-Click Bulk Ordering for B2B Buyers</h3>
-          <p>A tabbed order sheet with subcategory accordions and variant-level quantities that lets wholesale customers build a full order and add it to the cart in one click.</p>
-          <div class="project-tags"><b>Liquid</b><b>JavaScript</b><b>Cart API</b><b>B2B</b></div>
-          <span class="project-link">Read case study →</span>
-        </div>
+        <div class="work-media"><img src="../images/bulk-order.png" alt="Bulk ordering page with category tabs and a product order table" loading="lazy"><span class="work-tag">Shopify · B2B</span></div>
+        <div class="work-meta"><div><h3>Bulk Ordering</h3><span class="project-type">Shopify · B2B · Custom Experience</span></div><span class="project-link">Read case study →</span></div>
+        <p class="work-result">One-Click Bulk Ordering for B2B Buyers</p>
+        <p>A tabbed order sheet with subcategory accordions and variant-level quantities that lets wholesale customers build a full order and add it to the cart in one click.</p>
+        <div class="project-tags"><b>Liquid</b><b>JavaScript</b><b>Cart API</b><b>B2B</b></div>
       </a>
     </article>
 
@@ -141,7 +143,15 @@
   <div class="actions"><a class="button outline-light" href="mailto:rakeshgangani87@gmail.com">Email me</a><a class="button outline-light" href="https://linkedin.com/in/rakeshgangani" target="_blank" rel="noopener">LinkedIn</a></div>
 </section>
 </main>
-<footer>© 2026 Rakesh Gangani · Senior eCommerce Developer</footer>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div><a href="../#work">Selected work</a><a href="../case-studies/">Case studies</a><a href="../sidekick-ai/">Sidekick AI prompts</a></div>
+    <div><a href="mailto:rakeshgangani87@gmail.com">rakeshgangani87@gmail.com</a></div>
+    <div><a href="https://linkedin.com/in/rakeshgangani" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a></div>
+    <div><p>© 2026 by Rakesh Gangani.</p><p>Senior eCommerce Developer</p></div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
 <script src="../script.js"></script>
 </body>
 </html>

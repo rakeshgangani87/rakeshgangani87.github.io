@@ -1,4 +1,33 @@
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const el=document.querySelector(a.getAttribute('href'));if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'})}}));
+const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const lenis=window.Lenis&&!reduceMotion?new Lenis({autoRaf:true,lerp:.1}):null;
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const el=document.querySelector(a.getAttribute('href'));if(el){e.preventDefault();lenis?lenis.scrollTo(el,{offset:-80}):el.scrollIntoView({behavior:reduceMotion?'auto':'smooth'})}}));
+
+const scrollBar=document.querySelector('.scroll-progress'),siteHeader=document.querySelector('.nav');
+const onScroll=()=>{
+  const max=document.documentElement.scrollHeight-innerHeight;
+  if(scrollBar)scrollBar.style.transform='scaleX('+(max>0?Math.min(scrollY/max,1):0)+')';
+  if(siteHeader)siteHeader.classList.toggle('scrolled',scrollY>10);
+};
+addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);onScroll();
+
+if(!reduceMotion&&'IntersectionObserver' in window){
+  const revealItems=[...document.querySelectorAll('.hero-hello,.sticker.dark,.polaroid,.hero-id,.hero-copy>*,.stats-inner>div>*,.hero>*,.section-head,.work-card,.rows article,.stack>div,.cert-card,.steps>div,.prompt-list,.prompt-tips,.case-meta,.case-figure,.case-body section,.case-note,.contact>*')];
+  const revealer=new IntersectionObserver(entries=>entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');revealer.unobserve(en.target)}}),{rootMargin:'0px 0px -6% 0px',threshold:.06});
+  revealItems.forEach(el=>{
+    const i=[...el.parentElement.children].filter(c=>revealItems.includes(c)).indexOf(el);
+    el.style.setProperty('--d',(i%4)*80+'ms');el.classList.add('reveal');revealer.observe(el);
+  });
+}
+const counters=[...document.querySelectorAll('[data-count]')];
+if(counters.length&&!reduceMotion&&'IntersectionObserver' in window){
+  const counter=new IntersectionObserver(entries=>entries.forEach(en=>{
+    if(!en.isIntersecting)return;counter.unobserve(en.target);
+    const el=en.target,end=+el.dataset.count,t0=performance.now(),dur=1200;
+    const tick=t=>{const p=Math.min((t-t0)/dur,1);el.textContent=Math.round(end*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(tick)};
+    requestAnimationFrame(tick);
+  }),{threshold:.6});
+  counters.forEach(el=>{el.textContent='0';counter.observe(el)});
+}
 const promptItems=[...document.querySelectorAll('.prompt-list li')];
 if(promptItems.length){
   const filter=document.getElementById('prompt-filter'),count=document.getElementById('prompt-count'),empty=document.getElementById('prompt-empty');
@@ -23,7 +52,7 @@ if(promptItems.length){
 
 document.querySelectorAll('a[href^="mailto:"]').forEach(a=>a.addEventListener('click',()=>{
   const email=a.getAttribute('href').slice(7).split('?')[0],label=a.dataset.label||(a.dataset.label=a.textContent);
-  if(!navigator.clipboard)return;
+  if(!navigator.clipboard||a.children.length)return;
   navigator.clipboard.writeText(email).then(()=>{a.textContent='Copied: '+email;setTimeout(()=>{a.textContent=label},3000)});
 }));
 
