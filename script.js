@@ -11,7 +11,7 @@ const onScroll=()=>{
 addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);onScroll();
 
 if(!reduceMotion&&'IntersectionObserver' in window){
-  const revealItems=[...document.querySelectorAll('.hero-hello,.sticker.dark,.polaroid,.hero-id,.hero-copy>*,.stats-inner>div>*,.brands,.hero>*,.section-head,.work-card,.rows article,.stack>div,.cert-card,.steps>div,.prompt-list,.prompt-tips,.case-meta,.case-figure,.case-body section,.case-note,.contact>*')];
+  const revealItems=[...document.querySelectorAll('.hero-hello,.sticker.dark,.polaroid,.hero-id,.hero-copy>*,.stats-inner>div>*,.brands,.hero>*,.section-head,.work-card,.rows article,.stack>div,.cert-card,.testimonial,.steps>div,.prompt-list,.prompt-tips,.case-meta,.case-figure,.case-body section,.case-note,.contact>*')];
   const revealer=new IntersectionObserver(entries=>entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');revealer.unobserve(en.target)}}),{rootMargin:'0px 0px -6% 0px',threshold:.06});
   revealItems.forEach(el=>{
     const i=[...el.parentElement.children].filter(c=>revealItems.includes(c)).indexOf(el);

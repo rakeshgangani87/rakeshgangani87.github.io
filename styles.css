@@ -150,6 +150,18 @@ h1,h2,h3,p,ul,ol,dl,figure{margin:0}img{max-width:100%}a{color:inherit}
 .cert-info span{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:hsl(45 9% 7%/.55)}
 .cert-link{display:table;margin-top:14px;font-size:14px;font-weight:600;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
 
+/* Testimonials */
+.testimonials{display:grid;gap:48px}
+.testimonial{position:relative;margin:0;padding:56px 48px 40px;background:var(--secondary);border:1px solid var(--line)}
+.testimonial:before{content:"\201C";position:absolute;left:36px;top:-36px;font-stretch:125%;font-size:120px;font-weight:900;line-height:1;color:var(--primary)}
+.testimonial blockquote{margin:0}
+.testimonial blockquote p{font-size:17px;line-height:1.7;color:hsl(48 33% 94%/.85)}
+.testimonial blockquote p+p{margin-top:18px}
+.testimonial blockquote p:first-child{font-stretch:110%;font-size:21px;font-weight:600;line-height:1.5;color:var(--fg)}
+.testimonial figcaption{display:grid;gap:4px;margin-top:32px;padding-top:24px;border-top:1px solid var(--line)}
+.testimonial figcaption strong{font-stretch:125%;font-size:18px;font-weight:700;letter-spacing:-.025em}
+.testimonial figcaption span{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted)}
+
 /* How I work */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);margin-top:56px;border-top:1px solid var(--line)}
 .steps>div{padding:32px 28px 8px}.steps>div+div{border-left:1px solid var(--line)}.steps>div:first-child{padding-left:0}
@@ -243,9 +255,9 @@ h1,h2,h3,p,ul,ol,dl,figure{margin:0}img{max-width:100%}a{color:inherit}
 .case-note{border-left:3px solid var(--primary);background:var(--secondary);padding:22px 26px}.case-note p{font-size:14px;color:var(--muted);margin-top:6px}
 
 /* Blog */
-.post-list{display:grid;gap:72px;max-width:68rem}
+.post-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:72px 36px}
 .post-card .work-media{rotate:0deg!important}
-.post-card .work-media img{aspect-ratio:auto;height:auto;object-fit:contain}
+.post-card .work-media img{aspect-ratio:16/9;height:auto;object-fit:contain;object-position:center}
 .post-card .work-meta h3{font-size:clamp(20px,2.2vw,26px)}
 .post-byline{margin-top:24px;font-stretch:72%;font-size:13px;text-transform:uppercase;letter-spacing:.2em;color:var(--muted)}
 .post-tags{padding-top:18px}.post-tags b{font-size:12px}
@@ -296,6 +308,7 @@ h1,h2,h3,p,ul,ol,dl,figure{margin:0}img{max-width:100%}a{color:inherit}
 .rows article{grid-template-columns:1fr;gap:8px;padding:28px 0}.rows article:after{display:none}
 .stack>div{grid-template-columns:1fr;gap:14px;padding:26px 0}
 .cert-grid{gap:36px}
+.testimonial{padding:48px 24px 28px}.testimonial:before{left:20px;font-size:96px;top:-28px}.testimonial blockquote p{font-size:16px}.testimonial blockquote p:first-child{font-size:18px}
 .footer-inner{grid-template-columns:1fr 1fr}.footer-inner>div:last-child{justify-items:start;text-align:left}
 .hero{padding-top:calc(var(--nav-h) + 56px);padding-bottom:56px}
 .prompt-list{grid-template-columns:1fr}.prompt-search{flex-direction:column;align-items:stretch;gap:8px}.prompt-tips{padding:26px}
@@ -305,7 +318,7 @@ h1,h2,h3,p,ul,ol,dl,figure{margin:0}img{max-width:100%}a{color:inherit}
 .post-list{gap:56px}.post-body pre{padding:16px 18px}.post-body th,.post-body td{padding:11px 12px}
 }
 @media(max-width:640px){
-.work-grid,.cert-grid{grid-template-columns:1fr}
+.work-grid,.cert-grid,.post-list{grid-template-columns:1fr}
 .contact{padding-block:72px}.contact-form{padding:24px}.contact-form .field-row{grid-template-columns:1fr}
 .steps{grid-template-columns:1fr}.steps>div{border-left:0!important;padding-left:0}.steps>div+div{border-top:1px solid var(--line)}.steps b{margin-bottom:20px}
 .nav-cta{display:none}.nav-toggle{margin-left:auto}
