@@ -11,7 +11,7 @@ const onScroll=()=>{
 addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);onScroll();
 
 if(!reduceMotion&&'IntersectionObserver' in window){
-  const revealItems=[...document.querySelectorAll('.hero-hello,.sticker.dark,.polaroid,.hero-id,.hero-copy>*,.stats-inner>div>*,.brands,.hero>*,.section-head,.work-card,.rows article,.stack>div,.cert-card,.testimonial,.steps>div,.prompt-list,.prompt-tips,.case-meta,.case-figure,.case-body section,.case-note,.contact>*')];
+  const revealItems=[...document.querySelectorAll('.hero-side>*,.hero-main>*,.stat,.brand-grid,.hero>*,.section-head,.filters,.work-card,.quote-card,.service,.core-card,.stack-card,.cert-card,.step,.prompt-list,.prompt-tips,.case-meta,.case-figure,.case-body section,.case-note,.contact-card')];
   const revealer=new IntersectionObserver(entries=>entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');revealer.unobserve(en.target)}}),{rootMargin:'0px 0px -6% 0px',threshold:.06});
   revealItems.forEach(el=>{
     const i=[...el.parentElement.children].filter(c=>revealItems.includes(c)).indexOf(el);
@@ -28,12 +28,12 @@ if(counters.length&&!reduceMotion&&'IntersectionObserver' in window){
   }),{threshold:.6});
   counters.forEach(el=>{el.textContent='0';counter.observe(el)});
 }
-const brandSlider=document.querySelector('.brand-slider');
-if(brandSlider&&!reduceMotion){
-  const track=brandSlider.querySelector('.brand-track');
-  [...track.children].forEach(li=>{const c=li.cloneNode(true);c.setAttribute('aria-hidden','true');c.querySelector('a').tabIndex=-1;track.appendChild(c)});
-  brandSlider.classList.add('is-sliding');
-}
+const filterBtns=[...document.querySelectorAll('.filters [data-filter]')];
+filterBtns.forEach(btn=>btn.addEventListener('click',()=>{
+  const f=btn.dataset.filter;
+  filterBtns.forEach(b=>b.setAttribute('aria-pressed',b===btn));
+  document.querySelectorAll('.work-card[data-platform]').forEach(c=>{c.hidden=f!=='all'&&c.dataset.platform!==f;if(!c.hidden)c.classList.add('in')});
+}));
 const promptItems=[...document.querySelectorAll('.prompt-list li')];
 if(promptItems.length){
   const filter=document.getElementById('prompt-filter'),count=document.getElementById('prompt-count'),empty=document.getElementById('prompt-empty');
@@ -69,7 +69,8 @@ if(contactForm){
     e.preventDefault();
     if(contactForm.website.value)return;
     const data=new URLSearchParams();
-    new FormData(contactForm).forEach((v,k)=>{if(k.startsWith('entry.'))data.append(k,v)});
+    const scope=contactForm.scope?contactForm.scope.value:'';
+    new FormData(contactForm).forEach((v,k)=>{if(k.startsWith('entry.'))data.append(k,k==='entry.1011818678'&&scope?'Platform & scope: '+scope+'\n\n'+v:v)});
     btn.disabled=true;status.className='form-status';status.textContent='Sending…';
     fetch(contactForm.action,{method:'POST',mode:'no-cors',body:data})
       .then(()=>{contactForm.reset();status.classList.add('ok');status.textContent="Thanks! Your message has been sent. I'll get back to you soon."})
